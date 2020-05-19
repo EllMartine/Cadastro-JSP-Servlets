@@ -3,7 +3,7 @@ package connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class SingleConnnection {
+public class SingleConnection {
 	
 	private static String url = "jdbc:postgresql://localhost:5432/projeto-jsp?autoReconnect=true";
 	private static String user = "admin";
@@ -14,7 +14,7 @@ public class SingleConnnection {
 		conectar();
 	}
 	
-	public SingleConnnection() {
+	public SingleConnection() {
 		conectar();
 	}
 	
