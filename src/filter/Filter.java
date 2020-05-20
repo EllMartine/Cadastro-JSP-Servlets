@@ -13,22 +13,16 @@ import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/"})
 public class Filter implements javax.servlet.Filter{
 	
 	private static Connection connection;
-	
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		javax.servlet.Filter.super.destroy();
-	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		chain.doFilter(request, response);
 		try {
+			chain.doFilter(request, response);
 			connection.commit();
 		} catch (SQLException e) {
 			try {

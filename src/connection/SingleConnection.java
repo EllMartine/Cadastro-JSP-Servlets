@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 public class SingleConnection {
 	
 	private static String url = "jdbc:postgresql://localhost:5432/projeto-jsp?autoReconnect=true";
-	private static String user = "admin";
-	private static String password = "postgres"; 
+	private static String user = "postgres";
+	private static String password = "admin"; 
 	private static Connection connection = null;
 	
 	static {

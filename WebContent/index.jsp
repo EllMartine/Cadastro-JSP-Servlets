@@ -9,20 +9,20 @@
 <title>JSP</title>
 </head>
 <body>
-	
-	<!-- Tag JSTL -->
-	<c:out value="Testando o JSP(pelo JSTL)"></c:out>
-	<%-- out.print("Testando o JSP"); --%>
-	
-	<form action="ServletUsuario" method="post">
-		<label for="1">Login:</label>
-		<input type="text" id="1" name="login">
-		<br>
-		<label for="2">Senha:</label>
-		<input type="text" id="2" name="senha">
-		<br>
-		<input type="submit" value="Submit">
-	</form>
-	
+	<center>
+		<!-- Tag JSTL -->
+		<c:out value="Validando login()"></c:out>
+		<%-- out.print("Testando o JSP"); --%>
+		
+		<form action="ServletUsuario" method="post">
+			<label for="1">Login:</label>
+			<input type="text" id="1" name="login">
+			<br>
+			<label for="2">Senha:</label>
+			<input type="text" id="2" name="senha">
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+	<center>			
 </body>
 </html>

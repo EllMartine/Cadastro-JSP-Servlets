@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Usuario;
+import dao.DaoLogin;
 
 
 @WebServlet("/ServletUsuario")
 public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+	private DaoLogin daoLogin = new DaoLogin();
+	
     public ServletUsuario() {
         super();
     }
@@ -32,15 +34,17 @@ public class ServletUsuario extends HttpServlet {
 		
 		Usuario user = new Usuario(login, senha);
 		
-		boolean password = user.validarSenha(login, senha);
-		
-		if(password) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("acessoLiberado.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("acessoBloqueado.jsp");
-			dispatcher.forward(request, response);
+		try {
+			if(daoLogin.validarLogin(login, senha)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoLiberado.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoBloqueado.jsp");
+				dispatcher.forward(request, response);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
