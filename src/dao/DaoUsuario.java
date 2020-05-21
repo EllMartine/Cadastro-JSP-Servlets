@@ -49,6 +49,7 @@ public class DaoUsuario {
 				Usuario usuario = new Usuario();
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
+				usuario.setId(rs.getLong("id"));
 				
 			listaUsuarios.add(usuario);	
 			}
@@ -59,5 +60,64 @@ public class DaoUsuario {
 		return listaUsuarios;
 	}
 	
+	
+	public void delete(String login) {
+		String sql = "DELETE FROM usuario WHERE login = '" + login + "'";
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(sql);
+			st.execute();
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public Usuario consultar(String login) {
+		String sql = "SELECT * FROM usuario WHERE login = '" + login + "'";
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setLogin(rs.getString("login"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setId(rs.getLong("id"));
+				
+				return usuario;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public void atualizar(Usuario usuario) {
+		String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = " + usuario.getId();
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(sql);
+			st.setString(1, usuario.getLogin());
+			st.setString(2, usuario.getSenha());
+			st.executeUpdate();
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 	
 }
