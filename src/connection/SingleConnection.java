@@ -26,6 +26,7 @@ public class SingleConnection {
 				connection.setAutoCommit(false);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("Erro ao conectar no banco de dados");
 		}
 	}

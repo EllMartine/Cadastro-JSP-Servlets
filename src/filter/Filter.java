@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
 
-@WebFilter(urlPatterns = {"/"})
+@WebFilter(urlPatterns ={"/*"})
 public class Filter implements javax.servlet.Filter{
 	
 	private static Connection connection;
@@ -25,6 +25,7 @@ public class Filter implements javax.servlet.Filter{
 			chain.doFilter(request, response);
 			connection.commit();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {

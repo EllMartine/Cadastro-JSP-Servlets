@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h2>Bem vindo</h2>
+	
+	<a href="cadastroUsuario.jsp">Cadastrar usuário</a>
 </body>
 </html>
