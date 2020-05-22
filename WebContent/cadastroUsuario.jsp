@@ -13,10 +13,10 @@
 	<h1>Bem vindo ao cadastro de usuário</h1>
 	<form action="ServletUsuario" method="post">
 		<table>
-			<tr><td><label for="id">ID:</label></td></tr>
-			<tr><td><input type="text" readonly="readonly" id="id" name="id" value="${usuario.id}"></td></tr>
+	   <!-- <tr><td><label for="id">ID:</label></td></tr>
+			<tr><td><input type="text" readonly="readonly" id="id" name="id" value="${usuario.id}"></td></tr> -->
 		
-			<tr><td><label for="login">Login:</label></td></tr>
+		<tr><td><label for="login">Login:</label></td></tr>
 			<tr><td><input type="text" id="login" name="login" value="${usuario.login}"></td></tr>
 			
 			<tr><td><label for="senha">Senha:</label></td></tr>
