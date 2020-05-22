@@ -8,6 +8,7 @@ input {
 	padding-top: 5px;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	height: 30px;
 	width: 80%;
 	text-align: center;
 }
@@ -17,17 +18,41 @@ button {
 	background-color: #127DA7;
 	border-radius: 5px;
 	margin-top: 10px;
-	width: 40%;
+	height: 40px;
+	width: 50%;
+}
+
+h1 {
+	color: #ffffff;
+	text-align: center;
+	text-shadow: 1px 1px 1px black; 
 }
 
 h2 {
-	padding-top: 40px;
 	color: #696867;
+	padding-top: 10px;
+}
+
+table {
+	margin: 0 auto;
+	width: 100%;
+	margin-top: 100px;
+	border: none;
+}
+
+table th {
+	background: #fff;
+	color: #127DA7;
+}
+
+table tr td {
+	background-color: #fff;
+	text-align: center;
 }
 
 .container {
-	height: 250px;
-	width: 220px;
+	height: 350px;
+	width: 320px;
 	background-color: white;
 	margin: 100px auto;
 	text-align: center;

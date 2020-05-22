@@ -17,6 +17,9 @@
 		<!-- Tag JSTL -->
 		<!--<c:out value="Validando login()"></c:out>-->
 		<%-- out.print("Testando o JSP"); --%>
+		
+		<img alt="icon" src="resources/imagens/java.png" width="80px">
+		
 		<h2>Portal Login</h2>
 	
 		<form action="ServletLogin" method="post">

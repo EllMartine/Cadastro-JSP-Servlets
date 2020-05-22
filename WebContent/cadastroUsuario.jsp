@@ -8,25 +8,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-	<h1>Bem vindo ao cadastro de usuário</h1>
-	<form action="ServletUsuario" method="post">
-		<table>
-	   <!-- <tr><td><label for="id">ID:</label></td></tr>
-			<tr><td><input type="text" readonly="readonly" id="id" name="id" value="${usuario.id}"></td></tr> -->
-		
-		<tr><td><label for="login">Login:</label></td></tr>
-			<tr><td><input type="text" id="login" name="login" value="${usuario.login}"></td></tr>
-			
-			<tr><td><label for="senha">Senha:</label></td></tr>
-			<tr><td><input type="password" id="senha" name="senha" value="${usuario.senha}"></td></tr>
-			
-			<tr><td><input type="submit" value="Cadastrar"></td></tr>
-		</table>
-	</form>
+	<h1>Cadastro de usuário</h1>
+	<div class="container">
 	
+	<h2>Cadastro</h2>
+	
+	<form action="ServletUsuario" method="post">
+	
+			<input type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
+		
+			<input type="text" id="login" name="login" placeholder="LOGIN" value="${usuario.login}">
+			
+			<input type="password" id="senha" name="senha" placeholder="SENHA" value="${usuario.senha}">
+			
+			<button type="submit">Cadastrar</button>
+	
+	</form>
+	</div>
 	<table>
+			<th>ID</th><th>LOGIN</th><th>SENHA</th><th>EXCLUIR</th><th>EDITAR</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
