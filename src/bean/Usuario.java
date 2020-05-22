@@ -2,9 +2,10 @@ package bean;
 
 public class Usuario {
 	
+	private Long id;
 	private String login;
 	private String senha;
-	private Long id;
+	private String nome;
 	
 	public Usuario() {
 		super();
@@ -15,6 +16,8 @@ public class Usuario {
 		this.login = login;
 		this.senha = senha;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -40,7 +43,14 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public boolean validarSenha(String login, String senha) {
 		if(login.equals("admin") && senha.equals("admin123")) {
 			return true;

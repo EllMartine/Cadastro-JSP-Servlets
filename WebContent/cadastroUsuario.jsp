@@ -24,19 +24,21 @@
 			
 			<input type="password" id="senha" name="senha" placeholder="SENHA" value="${usuario.senha}">
 			
+			<input type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
+			
 			<button type="submit">Cadastrar</button>
 	
 	</form>
 	</div>
 	<table>
-			<th>ID</th><th>LOGIN</th><th>SENHA</th><th>EXCLUIR</th><th>EDITAR</th>
+			<th>ID</th><th>LOGIN</th><th>NOME</th><th>EXCLUIR</th><th>EDITAR</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
-				<td><c:out value="${usuario.senha}"></c:out></td>
-				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.login}">Excluir</a></td>
-				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.login}">Editar</a></td>
+				<td><c:out value="${usuario.nome}"></c:out></td>
+				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.login}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
+				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.login}"><img src="resources/imagens/editar.png" width="20px"></a></td>
 			</tr>
 		</c:forEach>
 	</table>	

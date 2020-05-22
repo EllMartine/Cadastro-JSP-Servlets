@@ -21,10 +21,11 @@ public class DaoUsuario {
 	public void salvar(Usuario usuario) {
 		
 		try {
-			String sql = "INSERT INTO usuario(login, senha) VALUES(?, ?)";
+			String sql = "INSERT INTO usuario(login, senha, nome) VALUES(?, ?, ?)";
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
+			st.setString(3, usuario.getNome());
 			st.execute();
 		} catch (Exception e) {
 			try {
@@ -47,9 +48,10 @@ public class DaoUsuario {
 			
 			while(rs.next()) {
 				Usuario usuario = new Usuario();
+				usuario.setId(rs.getLong("id"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
-				usuario.setId(rs.getLong("id"));
+				usuario.setNome(rs.getString("nome"));
 				
 			listaUsuarios.add(usuario);	
 			}
@@ -88,9 +90,10 @@ public class DaoUsuario {
 			
 			if (rs.next()) {
 				Usuario usuario = new Usuario();
+				usuario.setId(rs.getLong("id"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
-				usuario.setId(rs.getLong("id"));
+				usuario.setNome(rs.getString("nome"));
 				
 				return usuario;
 			}
@@ -102,12 +105,13 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(Usuario usuario) {
-		String sql = "UPDATE usuario SET login = ?, senha = ? WHERE id = " + usuario.getId();
+		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ? WHERE id = " + usuario.getId();
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
+			st.setString(3, usuario.getNome());
 			st.executeUpdate();
 			connection.commit();
 		} catch (Exception e) {
