@@ -11,13 +11,13 @@
 <link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-	<h1>Cadastro de usuário</h1>
+	<!--<h1>Cadastro de usuário</h1>-->
 	
 	<center><h3>${mensagem}</h3></center>
 	
 	<div class="container">
 	
-	<h2>Cadastro</h2>
+	<h2>Usuário</h2>
 	
 	<form action="ServletUsuario" method="post" id="formUser">
 	
@@ -32,7 +32,7 @@
 			<input class="input" type="text" id="telefone" name="telefone" placeholder="TELEFONE" value="${usuario.telefone}">
 			
 			<button class="button" type="submit">Cadastrar</button>
-			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
+			<button class="button" onclick="document.getElementById('formUser').action='ServletProduto?acao=cancelar'">Cancelar</button>
 	
 	</form>
 	</div>

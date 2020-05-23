@@ -32,9 +32,7 @@ public class ServletUsuario extends HttpServlet {
 			daoUsuario.delete(usuario);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
-			;
 			dispatcher.forward(request, response);
-
 		} else if (acao.equalsIgnoreCase("editar")) {
 			Usuario user = new Usuario();
 			user = daoUsuario.consultar(usuario);
@@ -44,7 +42,6 @@ public class ServletUsuario extends HttpServlet {
 		} else if (acao.equalsIgnoreCase("listarTodos")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
-			;
 			dispatcher.forward(request, response);
 		}
 	}
@@ -67,29 +64,38 @@ public class ServletUsuario extends HttpServlet {
 			String telefone = request.getParameter("telefone");
 
 			Usuario usuario = new Usuario();
-			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
+			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 			usuario.setTelefone(telefone);
+			
+			boolean aprovado = true;
 
 			if (id == null || id == "" && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(usuario);
 			} else if (id == null || id == "" && !daoUsuario.validarLogin(login)) {
 				request.setAttribute("mensagem", "Erro ao cadastrar: Login já existe");
+				aprovado = false;
 			} else if (id != null || id != ""){
 				if (daoUsuario.validarLoginUpdate(login, id)) {
 					daoUsuario.atualizar(usuario);
 				} else {
 					request.setAttribute("mensagem", "Erro ao atualizar: Login já existe");
+					aprovado = false;
 				}
 				//validando senha e atualizando
 				if (!daoUsuario.validarSenhaUpdate(senha, id)) {
 					daoUsuario.atualizar(usuario);
 				} else {
 					request.setAttribute("mensagem", "Erro ao atualizar: Essa senha já esta cadastrada");
+					aprovado = false;
 				}
 				//fim da validação e atualização
+			}
+			
+			if (!aprovado) {
+				request.setAttribute("usuario", usuario);
 			}
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
