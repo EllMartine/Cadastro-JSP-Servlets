@@ -78,7 +78,18 @@ public class ServletUsuario extends HttpServlet {
 			} else if (id == null || id == "" && !daoUsuario.validarLogin(login)) {
 				request.setAttribute("mensagem", "Erro ao cadastrar: Login já existe");
 			} else if (id != null || id != ""){
-				daoUsuario.atualizar(usuario);
+				if (daoUsuario.validarLoginUpdate(login, id)) {
+					daoUsuario.atualizar(usuario);
+				} else {
+					request.setAttribute("mensagem", "Erro ao atualizar: Login já existe");
+				}
+				//validando senha e atualizando
+				if (!daoUsuario.validarSenhaUpdate(senha, id)) {
+					daoUsuario.atualizar(usuario);
+				} else {
+					request.setAttribute("mensagem", "Erro ao atualizar: Essa senha já esta cadastrada");
+				}
+				//fim da validação e atualização
 			}
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");

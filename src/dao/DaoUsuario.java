@@ -101,6 +101,42 @@ public class DaoUsuario {
 		return false;
 	}
 	
+	public boolean validarLoginUpdate(String login, String id) {
+		String sql = "SELECT COUNT(1) AS qtd FROM usuario WHERE login = '" + login + "' AND id <> " + id;
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				
+				return rs.getInt("qtd") <= 0; //retorna o valor de count(se for menor e igual a 0)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean validarSenhaUpdate(String senha, String id) {
+		String sql = "SELECT COUNT(1) AS qtd FROM usuario WHERE senha = '" + senha + "' AND id = " + id;
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				
+				return rs.getInt("qtd") == 1; //retorna o valor de count(se for igual a 1 é porque a senha já está sendo usada)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public Usuario consultar(String id) {
 		String sql = "SELECT * FROM usuario WHERE id = '" + id + "'";
 		
