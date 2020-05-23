@@ -12,25 +12,29 @@
 </head>
 <body>
 	<h1>Cadastro de usuário</h1>
+	
+	<center><h3>${mensagem}</h3></center>
+	
 	<div class="container">
 	
 	<h2>Cadastro</h2>
 	
 	<form action="ServletUsuario" method="post" id="formUser">
 	
-			<input type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
+			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
 		
-			<input type="text" id="login" name="login" placeholder="LOGIN" value="${usuario.login}">
+			<input class="input" type="text" id="login" name="login" placeholder="LOGIN" value="${usuario.login}">
 			
-			<input type="password" id="senha" name="senha" placeholder="SENHA" value="${usuario.senha}">
+			<input class="input" type="password" id="senha" name="senha" placeholder="SENHA" value="${usuario.senha}">
 			
-			<input type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
+			<input class="input" type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
 			
-			<button class="button2" type="submit">Cadastrar</button>
-			<button class="button2" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
+			<button class="button" type="submit">Cadastrar</button>
+			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
 	</form>
 	</div>
+	
 	<table>
 			<th>ID</th><th>LOGIN</th><th>NOME</th><th>EXCLUIR</th><th>EDITAR</th>
 		<c:forEach items="${usuarios}" var="usuario">

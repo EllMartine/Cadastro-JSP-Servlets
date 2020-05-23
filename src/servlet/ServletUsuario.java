@@ -71,9 +71,11 @@ public class ServletUsuario extends HttpServlet {
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 
-			if (id == null || id == "") {
+			if (id == null || id == "" && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(usuario);
-			} else {
+			} else if (id == null || id == "" && !daoUsuario.validarLogin(login)) {
+				request.setAttribute("mensagem", "Erro ao cadastrar: Login já existe");
+			} else if (id != null || id != ""){
 				daoUsuario.atualizar(usuario);
 			}
 
