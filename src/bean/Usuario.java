@@ -6,6 +6,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private String nome;
+	private String telefone;
 	
 	public Usuario() {
 		super();
@@ -49,6 +50,14 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public boolean validarSenha(String login, String senha) {

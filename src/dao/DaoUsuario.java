@@ -21,11 +21,12 @@ public class DaoUsuario {
 	public void salvar(Usuario usuario) {
 		
 		try {
-			String sql = "INSERT INTO usuario(login, senha, nome) VALUES(?, ?, ?)";
+			String sql = "INSERT INTO usuario(login, senha, nome, telefone) VALUES(?, ?, ?, ?)";
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
 			st.setString(3, usuario.getNome());
+			st.setString(4, usuario.getTelefone());
 			st.execute();
 		} catch (Exception e) {
 			try {
@@ -52,6 +53,7 @@ public class DaoUsuario {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNome(rs.getString("nome"));
+				usuario.setTelefone(rs.getString("telefone"));
 				
 			listaUsuarios.add(usuario);	
 			}
@@ -112,6 +114,7 @@ public class DaoUsuario {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNome(rs.getString("nome"));
+				usuario.setTelefone(rs.getString("telefone"));
 				
 				return usuario;
 			}
@@ -123,13 +126,14 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(Usuario usuario) {
-		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ? WHERE id = " + usuario.getId();
+		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, telefone = ? WHERE id = " + usuario.getId();
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
 			st.setString(3, usuario.getNome());
+			st.setString(4, usuario.getTelefone());
 			st.executeUpdate();
 			connection.commit();
 		} catch (Exception e) {

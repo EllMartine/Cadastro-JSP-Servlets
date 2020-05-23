@@ -29,6 +29,8 @@
 			
 			<input class="input" type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
 			
+			<input class="input" type="text" id="telefone" name="telefone" placeholder="TELEFONE" value="${usuario.telefone}">
+			
 			<button class="button" type="submit">Cadastrar</button>
 			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
@@ -36,12 +38,13 @@
 	</div>
 	
 	<table>
-			<th>ID</th><th>LOGIN</th><th>NOME</th><th>EXCLUIR</th><th>EDITAR</th>
+			<th>ID</th><th>LOGIN</th><th>NOME</th><th>TELEFONE</th><th>EXCLUIR</th><th>EDITAR</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
 				<td><c:out value="${usuario.nome}"></c:out></td>
+				<td><c:out value="${usuario.telefone}"></c:out></td>
 				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
 				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.id}"><img src="resources/imagens/editar.png" width="20px"></a></td>
 			</tr>

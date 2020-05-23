@@ -11,6 +11,7 @@
 </head>
 <body>
 
+	<center><h3>${mensagem}</h3></center>
 		
 	<div class="container">
 	

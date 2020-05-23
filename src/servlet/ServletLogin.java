@@ -40,7 +40,8 @@ public class ServletLogin extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoBloqueado.jsp");
+				request.setAttribute("mensagem", "Erro: login ou senha incorretos");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				dispatcher.forward(request, response);
 			}
 		}catch (Exception e) {
