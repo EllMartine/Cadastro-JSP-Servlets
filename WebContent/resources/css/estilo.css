@@ -13,14 +13,26 @@ input {
 	text-align: center;
 }
 
-button {
+.button {
 	color: #FFFFFF;
 	background-color: #127DA7;
 	border-radius: 5px;
 	margin-top: 10px;
 	height: 40px;
 	width: 50%;
+	
 }
+
+.button2 {
+	color: #FFFFFF;
+	background-color: #127DA7;
+	border-radius: 5px;
+	margin-top: 10px;
+	height: 40px;
+	width: 30%;
+}
+
+
 
 h1 {
 	color: #ffffff;

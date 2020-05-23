@@ -16,7 +16,7 @@
 	
 	<h2>Cadastro</h2>
 	
-	<form action="ServletUsuario" method="post">
+	<form action="ServletUsuario" method="post" id="formUser">
 	
 			<input type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
 		
@@ -26,7 +26,8 @@
 			
 			<input type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
 			
-			<button type="submit">Cadastrar</button>
+			<button class="button2" type="submit">Cadastrar</button>
+			<button class="button2" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
 	</form>
 	</div>
@@ -37,8 +38,8 @@
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
 				<td><c:out value="${usuario.nome}"></c:out></td>
-				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.login}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
-				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.login}"><img src="resources/imagens/editar.png" width="20px"></a></td>
+				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
+				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.id}"><img src="resources/imagens/editar.png" width="20px"></a></td>
 			</tr>
 		</c:forEach>
 	</table>	

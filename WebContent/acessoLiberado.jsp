@@ -11,7 +11,7 @@
 	<div class="container">
 	<h2>Bem vindo</h2>
 	
-	<a href="cadastroUsuario.jsp">Cadastrar usuário</a>
+	<a href="ServletUsuario?acao=listarTodos">Cadastrar usuário</a>
 	</div>
 </body>
 </html>

@@ -63,8 +63,8 @@ public class DaoUsuario {
 	}
 	
 	
-	public void delete(String login) {
-		String sql = "DELETE FROM usuario WHERE login = '" + login + "'";
+	public void delete(String id) {
+		String sql = "DELETE FROM usuario WHERE id = '" + id + "'";
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -81,8 +81,8 @@ public class DaoUsuario {
 		}
 	}
 	
-	public Usuario consultar(String login) {
-		String sql = "SELECT * FROM usuario WHERE login = '" + login + "'";
+	public Usuario consultar(String id) {
+		String sql = "SELECT * FROM usuario WHERE id = '" + id + "'";
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);

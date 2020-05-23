@@ -29,7 +29,7 @@
 			<!--<label for="2">Senha:</label>-->
 			<input type="password" id="2" name="senha" placeholder="Senha">
 			<br>
-			<button type="submit">Submit</button>
+			<button class="button" type="submit">Submit</button>
 		</form>
 	</div>
 				
