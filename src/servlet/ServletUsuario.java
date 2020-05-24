@@ -33,13 +33,15 @@ public class ServletUsuario extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
-		} else if (acao.equalsIgnoreCase("editar")) {
+		} 
+		else if (acao.equalsIgnoreCase("editar")) {
 			Usuario user = new Usuario();
 			user = daoUsuario.consultar(usuario);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuario", user);
 			dispatcher.forward(request, response);
-		} else if (acao.equalsIgnoreCase("listarTodos")) {
+		}
+		else if (acao.equalsIgnoreCase("listarTodos")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
@@ -71,8 +73,24 @@ public class ServletUsuario extends HttpServlet {
 			usuario.setTelefone(telefone);
 			
 			boolean aprovado = true;
-
-			if (id == null || id == "" && daoUsuario.validarLogin(login)) {
+			
+			//validação dos campos
+			if (login == null || login.isEmpty()) {
+				request.setAttribute("mensagem", "Erro: Deve ser informado o Login");
+				aprovado = false;
+			} else if (senha == null || senha.isEmpty()){
+				request.setAttribute("mensagem", "Erro: Deve ser informado a Senha");
+				aprovado = false;
+			} else if (nome == null || nome.isEmpty()){
+				request.setAttribute("mensagem", "Erro: Deve ser informado o Nome");
+				aprovado = false;
+			} else if (telefone == null || telefone.isEmpty()){
+				request.setAttribute("mensagem", "Erro: Deve ser informado o Telefone");
+				aprovado = false;
+			}
+			
+			//início do processo de gravação e validação de login
+		 	else if (id == null || id == "" && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(usuario);
 			} else if (id == null || id == "" && !daoUsuario.validarLogin(login)) {
 				request.setAttribute("mensagem", "Erro ao cadastrar: Login já existe");

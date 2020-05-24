@@ -17,7 +17,7 @@
 	
 	<div class="container">
 	
-	<h2>Usuário</h2>
+	<img class="imgForm" src="resources/imagens/usuario.png" width="80px">
 	
 	<form action="ServletUsuario" method="post" id="formUser">
 	
@@ -32,7 +32,7 @@
 			<input class="input" type="text" id="telefone" name="telefone" placeholder="TELEFONE" value="${usuario.telefone}">
 			
 			<button class="button" type="submit">Cadastrar</button>
-			<button class="button" onclick="document.getElementById('formUser').action='ServletProduto?acao=cancelar'">Cancelar</button>
+			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
 	</form>
 	</div>

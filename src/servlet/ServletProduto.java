@@ -33,13 +33,15 @@ public class ServletProduto extends HttpServlet {
 			RequestDispatcher dispather = request.getRequestDispatcher("cadastroProduto.jsp");
 			request.setAttribute("produtos", daoProduto.listar());
 			dispather.forward(request, response);
-		} else if (acao.equalsIgnoreCase("editar")) {
+		} 
+		else if (acao.equalsIgnoreCase("editar")) {
 			Produto prod = new Produto();
 			prod = daoProduto.consultar(produto);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroProduto.jsp");
 			request.setAttribute("produto", prod);
 			dispatcher.forward(request, response);
-		} else if (acao.equalsIgnoreCase("listarTodos")) {
+		} 
+		else if (acao.equalsIgnoreCase("listarTodos")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroProduto.jsp");
 			request.setAttribute("produtos", daoProduto.listar());
 			dispatcher.forward(request, response);
@@ -66,12 +68,24 @@ public class ServletProduto extends HttpServlet {
 			Produto produto = new Produto();
 			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			produto.setNome(nome);
-			produto.setQuantidade(Double.parseDouble(quantidade));
-			produto.setValor(Double.parseDouble(valor));
+			produto.setQuantidade(!quantidade.isEmpty() ? Double.parseDouble(quantidade) : 0);
+			produto.setValor(!valor.isEmpty() ? Double.parseDouble(valor) : 0);
 
 			boolean aprovado = true;
+			
+			//validação dos campos
+			if (nome == null || nome.isEmpty()) {
+				request.setAttribute("mensagem", "Erro: Deve ser informado o Nome");
+				aprovado = false;
+			} else if (quantidade == null || quantidade.isEmpty() || produto.getQuantidade() == 0){
+				request.setAttribute("mensagem", "Erro: Deve ser informado a Quantidade");
+				aprovado = false;
+			} else if (valor == null || valor.isEmpty() || produto.getValor() == 0){
+				request.setAttribute("mensagem", "Erro: Deve ser informado o Valor");
+				aprovado = false;
+			}
 
-			if (id == null || id == "" && daoProduto.validarProduto(nome)) {
+			else if (id == null || id == "" && daoProduto.validarProduto(nome)) {
 				daoProduto.salvar(produto);
 			} else if (id == null || id == "" && !daoProduto.validarProduto(nome)) {
 				request.setAttribute("mensagem", "Erro ao cadastrar: Produto já existe");

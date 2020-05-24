@@ -16,7 +16,7 @@
 	
 	<div class="container">
 		
-		<h2>Produto</h2>
+		<img class="imgForm" src="resources/imagens/produto2.png" width="80px">
 		
 		<form action="ServletProduto" method="post" id="formProd">
 			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${produto.id}">
@@ -28,7 +28,7 @@
 			<input class="input" type="text" id="valor" name="valor" placeholder="VALOR" value="${produto.valor}">
 			
 			<button class="button" type="submit">Cadastrar</button>
-			<button class="button" onclick="document.getElementById('formProd').action='ServletUsuario?acao=cancelar'">Cancelar</button>
+			<button class="button" onclick="document.getElementById('formProd').action='ServletProduto?acao=cancelar'">Cancelar</button>
 		</form>
 	</div>
 	

@@ -48,17 +48,21 @@ table {
 	margin: 0 auto;
 	width: 80%;
 	margin-top: 100px;
-	border: none;
+	border-collapse: collapse;
 }
 
 table th {
-	background: #fff;
-	color: #127DA7;
+	background: #000;
+	color: #fff;
 }
 
 table tr td {
 	background-color: #fff;
 	text-align: center;
+}
+
+.imgForm {
+	margin-top: -20px;
 }
 
 .container {
