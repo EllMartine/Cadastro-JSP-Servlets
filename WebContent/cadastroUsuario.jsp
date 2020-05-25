@@ -15,11 +15,13 @@
 	
 	<center><h3>${mensagem}</h3></center>
 	
-	<div class="container">
+	<div class="menu"></div>
+	
+	<div class="container3">
 	
 	<img class="imgForm" src="resources/imagens/usuario.png" width="80px">
 	
-	<form action="ServletUsuario" method="post" id="formUser">
+	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false">
 	
 			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
 		
@@ -49,6 +51,29 @@
 				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.id}"><img src="resources/imagens/editar.png" width="20px"></a></td>
 			</tr>
 		</c:forEach>
-	</table>	
+	</table>
+	
+	<script type="text/javascript">
+	
+	function validarCampos() {
+		
+		if (document.getElementById("login").value == "") {
+			alert('Informe o login');
+			return false;
+		} else if (document.getElementById("senha").value == "") {
+			alert('Informe a senha');
+			return false;
+		} else if (document.getElementById("nome").value == "") {
+			alert('Informe o nome');
+			return false;
+		} else if (document.getElementById("telefone").value == "") {
+			alert('Informe o telefone');
+			return false;
+		}
+		
+		return true;
+		
+	}
+	</script>	
 </body>
 </html>

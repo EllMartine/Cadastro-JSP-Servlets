@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container2">
 	<h2>Bem vindo</h2>
 	
 	<a href="ServletUsuario?acao=listarTodos"><img src="resources/imagens/usuario.png" width="80px"></a>

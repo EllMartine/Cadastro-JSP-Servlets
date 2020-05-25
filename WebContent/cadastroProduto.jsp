@@ -14,11 +14,13 @@
 
 	<center><h3>${mensagem}</h3></center>
 	
-	<div class="container">
+	<div class="menu"></div>
+	
+	<div class="container3">
 		
 		<img class="imgForm" src="resources/imagens/produto2.png" width="80px">
 		
-		<form action="ServletProduto" method="post" id="formProd">
+		<form action="ServletProduto" method="post" id="formProd" onsubmit=" return validarCampos() ? true : false">
 			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${produto.id}">
 			
 			<input class="input" type="text" id="nome" name="nome" placeholder="NOME" value="${produto.nome}">
@@ -45,5 +47,24 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<script type="text/javascript">
+	
+	function validarCampos() {
+		
+		if (document.getElementById("nome").value == "") {
+			alert("Informe o nome");
+			return false;
+		} else if (document.getElementById("quantidade").value == "") {
+			alert("Informe a quantidade");
+			return false;
+		} else if (document.getElementById("valor").value == "") {
+			alert("Informe o valor");
+			return false;
+		} 
+		return true;
+	}
+	
+	</script>
 </body>
 </html>
