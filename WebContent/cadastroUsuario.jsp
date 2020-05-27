@@ -26,13 +26,13 @@
 		<li><a href="acessoLiberado.jsp"><img src="resources/imagens/home.png" width="20px"></a></li>
 	</ul>
 	</nav>
+	
+	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false">
 
 	<div class="container3">
 	
 	<img class="imgForm" src="resources/imagens/usuario.png" width="80px">
-	
-	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false">
-	
+		
 			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.id}">
 		
 			<input class="input" type="text" id="login" name="login" placeholder="LOGIN" value="${usuario.login}">
@@ -45,28 +45,30 @@
 			
 			<!-- Implementando WB -->
 			
-			<input class="input" type="text" id="cep" name="cep" placeholder="CEP" onblur=" consultarCep()">
+			<input class="input" type="text" id="cep" name="cep" placeholder="CEP" onblur=" consultarCep()" value="${usuario.cep}">
 			
 			<button class="button" type="submit">Cadastrar</button>
 			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
-	</form>
+	
 	</div>
 	
 	<div class="container3">
 	
 	<img class="imgForm" id="imgLocal" src="resources/imagens/local.png" width="80px">
 	
-			<input class="input" type="text" id="rua" name="rua" placeholder="RUA">
+			<input class="input" type="text" id="rua" name="rua" placeholder="RUA" value="${usuario.rua}">
 			
-			<input class="input" type="text" id="bairro" name="bairro" placeholder="BAIRRO">
+			<input class="input" type="text" id="bairro" name="bairro" placeholder="BAIRRO" value="${usuario.bairro}">
 			
-			<input class="input" type="text" id="cidade" name="cidade" placeholder="CIDADE">
+			<input class="input" type="text" id="cidade" name="cidade" placeholder="CIDADE" value="${usuario.cidade}">
 			
-			<input class="input" type="text" id="uf" name="uf" placeholder="UF">
+			<input class="input" type="text" id="estado" name="estado" placeholder="ESTADO" value="${usuario.estado}">
 			
-			<input class="input" type="text" id="ibge" name="ibge" placeholder="IBGE">
+			<input class="input" type="text" id="ibge" name="ibge" placeholder="IBGE" value="${usuario.ibge}">
 	</div>
+	
+	</form>	
 	
 	<table>
 			<th>ID</th><th>LOGIN</th><th>NOME</th><th>TELEFONE</th><th>EXCLUIR</th><th>EDITAR</th>
@@ -116,7 +118,7 @@
                 $("#rua").val(dados.logradouro);
                 $("#bairro").val(dados.bairro);
                 $("#cidade").val(dados.localidade);
-                $("#uf").val(dados.uf);
+                $("#estado").val(dados.uf);
                 $("#ibge").val(dados.ibge);
             } //end if.
             else {

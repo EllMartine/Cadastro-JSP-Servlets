@@ -64,6 +64,13 @@ public class ServletUsuario extends HttpServlet {
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
 			String telefone = request.getParameter("telefone");
+			
+			String cep = request.getParameter("cep");
+			String rua = request.getParameter("rua");
+			String bairro = request.getParameter("bairro");
+			String cidade = request.getParameter("cidade");
+			String estado = request.getParameter("estado");
+			String ibge = request.getParameter("ibge");
 
 			Usuario usuario = new Usuario();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : null);
@@ -71,6 +78,13 @@ public class ServletUsuario extends HttpServlet {
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 			usuario.setTelefone(telefone);
+			
+			usuario.setCep(cep);
+			usuario.setRua(rua);
+			usuario.setBairro(bairro);
+			usuario.setCidade(cidade);
+			usuario.setEstado(estado);
+			usuario.setIbge(ibge);
 			
 			boolean aprovado = true;
 			
@@ -102,13 +116,7 @@ public class ServletUsuario extends HttpServlet {
 					request.setAttribute("mensagem", "Erro ao atualizar: Login já existe");
 					aprovado = false;
 				}
-				//validando senha e atualizando
-				if (!daoUsuario.validarSenhaUpdate(senha, id)) {
-					daoUsuario.atualizar(usuario);
-				} else {
-					request.setAttribute("mensagem", "Erro ao atualizar: Essa senha já esta cadastrada");
-					aprovado = false;
-				}
+				
 				//fim da validação e atualização
 			}
 			

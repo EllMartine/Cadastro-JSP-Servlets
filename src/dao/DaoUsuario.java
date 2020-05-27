@@ -21,12 +21,18 @@ public class DaoUsuario {
 	public void salvar(Usuario usuario) {
 		
 		try {
-			String sql = "INSERT INTO usuario(login, senha, nome, telefone) VALUES(?, ?, ?, ?)";
+			String sql = "INSERT INTO usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
 			st.setString(3, usuario.getNome());
 			st.setString(4, usuario.getTelefone());
+			st.setString(5, usuario.getCep());
+			st.setString(6, usuario.getRua());
+			st.setString(7, usuario.getBairro());
+			st.setString(8, usuario.getCidade());
+			st.setString(9, usuario.getEstado());
+			st.setString(10, usuario.getIbge());
 			st.execute();
 		} catch (Exception e) {
 			try {
@@ -54,6 +60,12 @@ public class DaoUsuario {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setTelefone(rs.getString("telefone"));
+				usuario.setCep(rs.getString("cep"));
+				usuario.setRua(rs.getString("rua"));
+				usuario.setBairro(rs.getString("bairro"));
+				usuario.setCidade(rs.getString("cidade"));
+				usuario.setEstado(rs.getString("estado"));
+				usuario.setIbge(rs.getString("ibge"));
 				
 			listaUsuarios.add(usuario);	
 			}
@@ -151,6 +163,12 @@ public class DaoUsuario {
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setTelefone(rs.getString("telefone"));
+				usuario.setCep(rs.getString("cep"));
+				usuario.setRua(rs.getString("rua"));
+				usuario.setBairro(rs.getString("bairro"));
+				usuario.setCidade(rs.getString("cidade"));
+				usuario.setEstado(rs.getString("estado"));
+				usuario.setIbge(rs.getString("ibge"));
 				
 				return usuario;
 			}
@@ -162,7 +180,7 @@ public class DaoUsuario {
 	}
 
 	public void atualizar(Usuario usuario) {
-		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, telefone = ? WHERE id = " + usuario.getId();
+		String sql = "UPDATE usuario SET login = ?, senha = ?, nome = ?, telefone = ?, cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ? WHERE id = " + usuario.getId();
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -170,6 +188,12 @@ public class DaoUsuario {
 			st.setString(2, usuario.getSenha());
 			st.setString(3, usuario.getNome());
 			st.setString(4, usuario.getTelefone());
+			st.setString(5, usuario.getCep());
+			st.setString(6, usuario.getRua());
+			st.setString(7, usuario.getBairro());
+			st.setString(8, usuario.getCidade());
+			st.setString(9, usuario.getEstado());
+			st.setString(10, usuario.getIbge());
 			st.executeUpdate();
 			connection.commit();
 		} catch (Exception e) {
