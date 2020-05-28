@@ -21,7 +21,7 @@
 	</ul>
 	</nav>
 	
-	<div class="container3">
+	<div class="container">
 		
 		<img class="imgForm" src="resources/imagens/produto2.png" width="80px">
 		
