@@ -41,7 +41,7 @@
 			
 			<input class="input" type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
 			
-			<input class="input" type="text" id="telefone" name="telefone" placeholder="TELEFONE" value="${usuario.telefone}">
+			<input class="input" type="text" id="telefone" name="telefone" placeholder="CONTATO" value="${usuario.telefone}">
 			
 			<!-- Implementando WB -->
 			
@@ -71,7 +71,7 @@
 	</form>	
 	
 	<table>
-			<th>ID</th><th>LOGIN</th><th>NOME</th><th>TELEFONE</th><th>EXCLUIR</th><th>EDITAR</th><th>CONTATOS</th>
+			<th>ID</th><th>LOGIN</th><th>NOME</th><th>CONTATO</th><th>EXCLUIR</th><th>EDITAR</th><th>TELEFONES</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
@@ -80,7 +80,7 @@
 				<td><c:out value="${usuario.telefone}"></c:out></td>
 				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
 				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.id}"><img src="resources/imagens/editar.png" width="20px"></a></td>
-				<td><a href="ServletTelefone?usuario=${usuario.id}"><img src="resources/imagens/telefone.png" width="20px"></a></td>
+				<td><a href="ServletTelefone?acao=addTel&usuario=${usuario.id}"><img src="resources/imagens/telefone.png" width="20px"></a></td>
 			</tr>
 		</c:forEach>
 	</table>

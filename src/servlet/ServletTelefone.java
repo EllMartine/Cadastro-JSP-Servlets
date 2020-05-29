@@ -30,6 +30,10 @@ public class ServletTelefone extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		String acao = request.getParameter("acao");
+		
+		if (acao.equalsIgnoreCase("addTel")) {
+		
 		String user = request.getParameter("usuario"); //id do usuário capturado pela servlet
 		Usuario usuario = daoUsuario.consultar(user); // obj usuário carregado pelo metodo
 		
@@ -38,8 +42,19 @@ public class ServletTelefone extends HttpServlet {
 		request.setAttribute("usuario", usuario); //usuário sendo carregado para o formulário
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroTelefone.jsp");
-		dispatcher.forward(request, response);
+		request.setAttribute("telefones", daoTelefone.listar(usuario.getId()));
+		dispatcher.forward(request, response); 
 		
+		} else if(acao.equalsIgnoreCase("deleteTel")) {
+			String telefone = request.getParameter("telefone");
+			daoTelefone.delete(telefone);
+			
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroTelefone.jsp");
+			request.setAttribute("telefones", daoTelefone.listar(usuario.getId()));
+			dispatcher.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

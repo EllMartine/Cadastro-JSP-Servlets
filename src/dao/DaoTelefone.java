@@ -64,7 +64,7 @@ public class DaoTelefone {
 	}
 	
 	public  void delete(String id) {
-		String sql = "DELETE FROM telefone WHERE id = " + id;
+		String sql = "DELETE FROM telefone WHERE id_telefone = " + id;
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);

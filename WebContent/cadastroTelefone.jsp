@@ -49,7 +49,7 @@
 				<td><c:out value="${telefone.numero}"></c:out></td>
 				<td><c:out value="${telefone.tipo}"></c:out></td>
 	
-				<td><a href="ServletUsuario?acao=delete&telefone=${telefone.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
+				<td><a href="ServletTelefone?acao=deleteTel&telefone=${telefone.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
 			</tr>
 		</c:forEach>
 	</table>
