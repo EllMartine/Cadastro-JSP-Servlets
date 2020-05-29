@@ -8,24 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Produto;
+import bean.Telefone;
 import connection.SingleConnection;
 
-public class DaoProduto {
+public class DaoTelefone {
 
 	private Connection connection;
 	
-	public DaoProduto() {
+	public DaoTelefone() {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public void salvar(Produto produto) {
-		String sql = "INSERT INTO produto(nome, quantidade, valor) VALUES(?, ?, ?)";
+	public void salvar(Telefone telefone) {
+		String sql = "INSERT INTO telefone(numero, tipo, proprietario) VALUES(?, ?, ?)";
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
-			st.setString(1, produto.getNome());
-			st.setDouble(2, produto.getQuantidade());
-			st.setDouble(3, produto.getValor());
+			st.setString(1, telefone.getNumero());
+			st.setString(2, telefone.getTipo());
+			st.setLong(3, telefone.getProprietario());
 			st.execute();
 			
 		} catch (Exception e) {
@@ -38,32 +39,32 @@ public class DaoProduto {
 		}
 	}
 	
-	public List<Produto> listar() {
-		List<Produto> listaProdutos = new ArrayList<Produto>();
+	public List<Telefone> listar(Long proprietario) {
+		List<Telefone> listaTelefones = new ArrayList<Telefone>();
 		
-		String sql = "SELECT * FROM produto";
+		String sql = "SELECT * FROM telefone WHERE proprietario = " + proprietario;
 		 try {
 			PreparedStatement st = connection.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				Produto produto = new Produto();
-				produto.setId(rs.getLong("id"));
-				produto.setNome(rs.getString("nome"));
-				produto.setQuantidade(rs.getDouble("quantidade"));
-				produto.setValor(rs.getDouble("valor"));
+				Telefone telefone = new Telefone();
+				telefone.setId(rs.getLong("id_telefone"));
+				telefone.setNumero(rs.getString("numero"));
+				telefone.setTipo(rs.getString("tipo"));
+				telefone.setProprietario(rs.getLong("proprietario"));
 				
-				listaProdutos.add(produto);
+				listaTelefones.add(telefone);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		 
-		 return listaProdutos;
+		 return listaTelefones;
 	}
 	
 	public  void delete(String id) {
-		String sql = "DELETE FROM produto WHERE id = " + id;
+		String sql = "DELETE FROM telefone WHERE id = " + id;
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -79,8 +80,8 @@ public class DaoProduto {
 		}
 	}
 	
-	public boolean validarProduto(String nome) {
-		String sql = "SELECT COUNT(1) AS qtd FROM produto WHERE nome = '" + nome + "'";
+	public boolean validarTelefone(String numero) {
+		String sql = "SELECT COUNT(1) AS qtd FROM telefone WHERE numero = '" + numero + "'";
 	
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -97,8 +98,8 @@ public class DaoProduto {
 		return false;
 	}
 	
-	public boolean validarProdutoUpdate(String nome, String id) {
-		String sql = "SELECT COUNT(1) AS qtd FROM produto WHERE nome = '" + nome + "' AND id <> " + id;
+	public boolean validarTelefoneUpdate(String numero, String id) {
+		String sql = "SELECT COUNT(1) AS qtd FROM telefone WHERE mumero = '" + numero + "' AND id_telefone <> " + id;
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
@@ -115,21 +116,21 @@ public class DaoProduto {
 		return false;
 	}
 	
-	public Produto consultar(String id) {
-		String sql = "SELECT * FROM produto WHERE id = " + id;
+	public Telefone consultar(String id) {
+		String sql = "SELECT * FROM telefone WHERE id_telefone = " + id;
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Produto produto = new Produto();
-				produto.setId(rs.getLong("id"));
-				produto.setNome(rs.getString("nome"));
-				produto.setQuantidade(rs.getDouble("quantidade"));
-				produto.setValor(rs.getDouble("valor"));
+				Telefone telefone = new Telefone();
+				telefone.setId(rs.getLong("id_cliente"));
+				telefone.setNumero(rs.getString("numero"));
+				telefone.setTipo(rs.getString("tipo"));
+				telefone.setProprietario(rs.getLong("proprietario"));
 				
-				return produto;
+				return telefone;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,14 +139,14 @@ public class DaoProduto {
 		return null;
 	}
 	
-	public void atualizar(Produto produto) {
-		String sql = "UPDATE produto SET nome = ?, quantidade = ?, valor = ? WHERE id = " + produto.getId();
+	public void atualizar(Telefone telefone) {
+		String sql = "UPDATE telefone SET numero = ?, tipo = ?, proprietario = ? WHERE id = " + telefone.getId();
 		
 		try {
 			PreparedStatement st = connection.prepareStatement(sql);
-			st.setString(1, produto.getNome());
-			st.setDouble(2, produto.getQuantidade());
-			st.setDouble(3, produto.getValor());
+			st.setString(1, telefone.getNumero());
+			st.setString(2, telefone.getTipo());
+			st.setLong(3, telefone.getProprietario());
 			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

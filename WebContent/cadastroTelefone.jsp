@@ -26,7 +26,7 @@
 		<img class="imgForm" src="resources/imagens/telefone.png" width="80px">
 		
 		<form action="ServletTelefone" method="post" id="formProd" onsubmit=" return validarCampos() ? true : false">
-			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="ID" value="${usuario.nome}">
+			<input class="input" type="text" readonly="readonly" id="id" name="id" placeholder="PROPRIETÁRIO" value="${usuario.nome}">
 			
 			<input class="input" type="text" id="numero" name="numero" placeholder="NÚMERO" value="${numero}">
 			

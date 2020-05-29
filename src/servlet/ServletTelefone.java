@@ -9,14 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Telefone;
 import bean.Usuario;
+import dao.DaoTelefone;
 import dao.DaoUsuario;
 
 @WebServlet("/ServletTelefone")
 public class ServletTelefone extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	DaoUsuario daoUsuario = new DaoUsuario();
+	private DaoUsuario daoUsuario = new DaoUsuario();
+	private DaoTelefone daoTelefone = new DaoTelefone();
+	private Telefone telefone = new Telefone();
 
 	public ServletTelefone() {
 		super();
@@ -41,9 +45,28 @@ public class ServletTelefone extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		
 		String numero = request.getParameter("numero");
 		String tipo = request.getParameter("tipo");
-
+		
+		Telefone telefone = new Telefone();
+		telefone.setNumero(numero);
+		telefone.setTipo(tipo);
+		telefone.setProprietario(usuario.getId());
+		
+		if (numero == null || numero.isEmpty()) {
+			request.setAttribute("mensagem", "Erro: Deve ser informado o numero");	
+		}
+		
+		daoTelefone.salvar(telefone);		
+		
+		request.getSession().setAttribute("usuario", usuario);
+		request.setAttribute("usuario", usuario);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroTelefone.jsp");
+		request.setAttribute("telefones", daoTelefone.listar(usuario.getId()));
+		dispatcher.forward(request, response);
 	}
 
 }
