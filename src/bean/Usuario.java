@@ -15,6 +15,9 @@ public class Usuario {
 	private String estado;
 	private String ibge;
 	
+	private String fotoBase64;
+	private String contentType;
+	
 	public Usuario() {
 		super();
 	}
@@ -113,6 +116,22 @@ public class Usuario {
 
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
+	}
+
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	public boolean validarSenha(String login, String senha) {

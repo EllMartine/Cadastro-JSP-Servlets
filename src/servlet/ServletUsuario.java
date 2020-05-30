@@ -1,18 +1,30 @@
 package servlet;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import bean.Usuario;
 import dao.DaoUsuario;
 
 @WebServlet("/ServletUsuario")
+@MultipartConfig
 public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,15 +45,13 @@ public class ServletUsuario extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
-		} 
-		else if (acao.equalsIgnoreCase("editar")) {
+		} else if (acao.equalsIgnoreCase("editar")) {
 			Usuario user = new Usuario();
 			user = daoUsuario.consultar(usuario);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuario", user);
 			dispatcher.forward(request, response);
-		}
-		else if (acao.equalsIgnoreCase("listarTodos")) {
+		} else if (acao.equalsIgnoreCase("listarTodos")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
@@ -86,6 +96,18 @@ public class ServletUsuario extends HttpServlet {
 			usuario.setEstado(estado);
 			usuario.setIbge(ibge);
 			
+			//tratado arquivos de imagem
+			if (ServletFileUpload.isMultipartContent(request)) {
+				
+				Part img = request.getPart("img");
+				
+				String img64 = new Base64()
+				.encodeBase64String(converterStreamToByte(img.getInputStream()));		
+				
+				usuario.setFotoBase64(img64);
+				usuario.setContentType(img.getContentType());
+			}
+			
 			boolean aprovado = true;
 			
 			//validação dos campos
@@ -104,9 +126,9 @@ public class ServletUsuario extends HttpServlet {
 			}
 			
 			//início do processo de gravação e validação de login
-		 	else if (id == null || id == "" && daoUsuario.validarLogin(login)) {
+		 	else if (id == null || id.equalsIgnoreCase("") && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(usuario);
-			} else if (id == null || id == "" && !daoUsuario.validarLogin(login)) {
+			} else if (id == null || id.equalsIgnoreCase("") && !daoUsuario.validarLogin(login)) {
 				request.setAttribute("mensagem", "Erro ao cadastrar: Login já existe");
 				aprovado = false;
 			} else if (id != null || id != ""){
@@ -128,5 +150,18 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
 		}
+	}
+	
+	//Converte a entrada de fluxo de dados da imagem para um byte[]
+	private byte[] converterStreamToByte(InputStream img) throws IOException {
+		
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		int dados = img.read();
+		while (dados != -1) {
+			outputStream.write(dados);
+			dados = img.read();
+		}
+		
+		return outputStream.toByteArray();
 	}
 }

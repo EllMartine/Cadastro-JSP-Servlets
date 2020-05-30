@@ -27,7 +27,7 @@
 	</ul>
 	</nav>
 	
-	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false">
+	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false" enctype="multipart/form-data">
 
 	<div class="container3">
 	
@@ -46,10 +46,8 @@
 			<!-- Implementando WB -->
 			
 			<input class="input" type="text" id="cep" name="cep" placeholder="CEP" onblur=" consultarCep()" value="${usuario.cep}">
-			
-			<button class="button" type="submit">Cadastrar</button>
-			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	
+			<input type="file" id="img" name="img">
 	
 	</div>
 	
@@ -66,6 +64,9 @@
 			<input class="input" type="text" id="estado" name="estado" placeholder="ESTADO" value="${usuario.estado}">
 			
 			<input class="input" type="text" id="ibge" name="ibge" placeholder="IBGE" value="${usuario.ibge}">
+			
+			<button class="button" type="submit">Cadastrar</button>
+			<button class="button" onclick="document.getElementById('formUser').action='ServletUsuario?acao=cancelar'">Cancelar</button>
 	</div>
 	
 	</form>	

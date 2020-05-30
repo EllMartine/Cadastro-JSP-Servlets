@@ -21,7 +21,7 @@ public class DaoUsuario {
 	public void salvar(Usuario usuario) {
 		
 		try {
-			String sql = "INSERT INTO usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuario(login, senha, nome, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement st = connection.prepareStatement(sql);
 			st.setString(1, usuario.getLogin());
 			st.setString(2, usuario.getSenha());
@@ -33,6 +33,8 @@ public class DaoUsuario {
 			st.setString(8, usuario.getCidade());
 			st.setString(9, usuario.getEstado());
 			st.setString(10, usuario.getIbge());
+			st.setString(11, usuario.getFotoBase64());
+			st.setString(12, usuario.getContentType());
 			st.execute();
 		} catch (Exception e) {
 			try {
