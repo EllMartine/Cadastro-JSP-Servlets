@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.io.OutputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
 
@@ -55,6 +53,29 @@ public class ServletUsuario extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daoUsuario.listar());
 			dispatcher.forward(request, response);
+		} else if (acao.equalsIgnoreCase("download")) {
+			Usuario user = daoUsuario.consultar(usuario);
+			if (user != null) {
+				response.setHeader("Content-Disposition", "attachment;filename=arquivo." + user.getContentType().split("\\/")[1]);
+				
+				//Converte a basee64 da imagem do banco para byte[]
+				byte[] arquivoImg = new Base64().decodeBase64(user.getFotoBase64());
+				
+				//Coloca os bytes em um objeto de entrada para processar
+				InputStream inputSt = new ByteArrayInputStream(arquivoImg);
+				
+				//inicio da resposta para o navegador
+				int read = 0;
+				byte[] bytes = new byte[1024];
+				OutputStream outputSt = response.getOutputStream();
+				
+				while ((read = inputSt.read(bytes)) != -1) {
+					outputSt.write(bytes, 0, read);
+				}
+				
+				outputSt.flush();
+				outputSt.close();
+			}
 		}
 	}
 

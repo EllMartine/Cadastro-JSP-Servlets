@@ -40,9 +40,7 @@
 			<input class="input" type="password" id="senha" name="senha" placeholder="SENHA" value="${usuario.senha}">
 			
 			<input class="input" type="text" id="nome" name="nome" placeholder="NOME" value="${usuario.nome}">
-			
-			<input class="input" type="text" id="telefone" name="telefone" placeholder="CONTATO" value="${usuario.telefone}">
-			
+						
 			<!-- Implementando WB -->
 			
 			<input class="input" type="text" id="cep" name="cep" placeholder="CEP" onblur=" consultarCep()" value="${usuario.cep}">
@@ -72,14 +70,13 @@
 	</form>	
 	
 	<table>
-			<th>ID</th><th>LOGIN</th><th>IMAGEM</th><th>NOME</th><th>CONTATO</th><th>EXCLUIR</th><th>EDITAR</th><th>TELEFONES</th>
+			<th>ID</th><th>LOGIN</th><th>IMAGEM</th><th>NOME</th><th>EXCLUIR</th><th>EDITAR</th><th>TELEFONES</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
-				<td><img src="<c:out value="${usuario.arquivo}" ></c:out>" width="30px" height="30px"></td>
+				<td><a href="ServletUsuario?acao=download&usuario=${usuario.id}"><img src="<c:out value="${usuario.arquivo}" ></c:out>" width="30px" height="30px"></a></td>
 				<td><c:out value="${usuario.nome}"></c:out></td>
-				<td><c:out value="${usuario.telefone}"></c:out></td>
 				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>
 				<td><a href="ServletUsuario?acao=editar&usuario=${usuario.id}"><img src="resources/imagens/editar.png" width="20px"></a></td>
 				<td><a href="ServletTelefone?acao=addTel&usuario=${usuario.id}"><img src="resources/imagens/telefone.png" width="20px"></a></td>
