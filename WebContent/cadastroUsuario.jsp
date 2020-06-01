@@ -18,14 +18,14 @@
 <body>
 	<!--<h1>Cadastro de usuário</h1>-->
 	
-	<center><h3>${mensagem}</h3></center>
-	
 	<nav class="menu">
 	<ul>
 		<li><a href="index.jsp"><img src="resources/imagens/porta.svg" width="20px"></a></li>
 		<li><a href="acessoLiberado.jsp"><img src="resources/imagens/home.png" width="20px"></a></li>
 	</ul>
 	</nav>
+	
+	<center><h3>${mensagem}</h3></center>
 	
 	<form action="ServletUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false" enctype="multipart/form-data">
 
@@ -72,11 +72,12 @@
 	</form>	
 	
 	<table>
-			<th>ID</th><th>LOGIN</th><th>NOME</th><th>CONTATO</th><th>EXCLUIR</th><th>EDITAR</th><th>TELEFONES</th>
+			<th>ID</th><th>LOGIN</th><th>IMAGEM</th><th>NOME</th><th>CONTATO</th><th>EXCLUIR</th><th>EDITAR</th><th>TELEFONES</th>
 		<c:forEach items="${usuarios}" var="usuario">
 			<tr>
 				<td><c:out value="${usuario.id}"></c:out></td>
 				<td><c:out value="${usuario.login}"></c:out></td>
+				<td><img src="<c:out value="${usuario.arquivo}" ></c:out>" width="30px" height="30px"></td>
 				<td><c:out value="${usuario.nome}"></c:out></td>
 				<td><c:out value="${usuario.telefone}"></c:out></td>
 				<td><a href="ServletUsuario?acao=delete&usuario=${usuario.id}"><img src="resources/imagens/excluir.jpg" width="20px"></a></td>

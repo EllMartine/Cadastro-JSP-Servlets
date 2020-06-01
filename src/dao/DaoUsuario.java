@@ -68,6 +68,8 @@ public class DaoUsuario {
 				usuario.setCidade(rs.getString("cidade"));
 				usuario.setEstado(rs.getString("estado"));
 				usuario.setIbge(rs.getString("ibge"));
+				usuario.setFotoBase64(rs.getString("fotobase64"));
+				usuario.setContentType(rs.getString("contenttype"));
 				
 			listaUsuarios.add(usuario);	
 			}

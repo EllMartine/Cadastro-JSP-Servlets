@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-
-	<center><h3>${mensagem}</h3></center>
 	
 	<nav class="menu">
 	<ul>
@@ -20,6 +18,8 @@
 		<li><a href="acessoLiberado.jsp"><img src="resources/imagens/home.png" width="20px"></a></li>
 	</ul>
 	</nav>
+	
+	<center><h3>${mensagem}</h3></center>
 	
 	<div class="container">
 		

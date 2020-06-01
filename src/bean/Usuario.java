@@ -18,6 +18,9 @@ public class Usuario {
 	private String fotoBase64;
 	private String contentType;
 	
+	private String arquivo;
+	
+	
 	public Usuario() {
 		super();
 	}
@@ -132,6 +135,12 @@ public class Usuario {
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	
+	public String getArquivo() {
+		arquivo = "data:" + this.contentType + ";base64," + this.fotoBase64;
+		
+		return arquivo;
 	}
 
 	public boolean validarSenha(String login, String senha) {
